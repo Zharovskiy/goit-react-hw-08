@@ -1,0 +1,39 @@
+.contactList {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 345px;
+}
+
+.contactCard {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 15px 10px 15px 10px;
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1279px) {
+  .contactList {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .contactCard {
+    width: calc((100% - 15px) / 2);
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .contactList {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .contactCard {
+    width: calc((100% - 45px) / 4);
+  }
+}
