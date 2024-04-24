@@ -1,8 +1,8 @@
-import { createSlice, createSelector } from "@reduxjs/toolkit";
-import { fetchContacts } from "./contactsOps";
-import { addContact } from "./contactsOps";
-import { deleteContact } from "./contactsOps";
-import { selectNameFilter } from "./filtersSlice";
+import { createSlice } from "@reduxjs/toolkit";
+import { fetchContacts } from "../contacts/operation.js";
+import { addContact } from "../contacts/operation.js";
+import { deleteContact } from "../contacts/operation.js";
+import { updateContact } from "../contacts/operation.js";
 
 const initialState = {
   contacts: {
@@ -49,21 +49,20 @@ const contactsSlice = createSlice({
           (item) => item.id !== action.payload.id
         );
       })
-      .addCase(deleteContact.rejected, handleRejected);
+      .addCase(deleteContact.rejected, handleRejected)
+      // Зміна контакту
+      .addCase(updateContact.pending, handlePending)
+      .addCase(updateContact.fulfilled, (state, action) => {
+        state.loading = false;
+
+        // Перевірити роботу методу
+        const index = state.items.indexOf(
+          (item) => item.id === action.payload.id
+        );
+        state.items.splice(index, 1, action.payload);
+      })
+      .addCase(updateContact.rejected, handleRejected);
   },
 });
 
 export const contactsReducer = contactsSlice.reducer;
-
-export const selectContacts = (state) => state.contacts.items;
-export const selectLoading = (state) => state.contacts.loading;
-export const selectError = (state) => state.contacts.error;
-
-export const selectFilteredContacts = createSelector(
-  [selectContacts, selectNameFilter],
-  (selectContacts, selectNameFilter) => {
-    return selectContacts.filter((contact) =>
-      contact.name.toLowerCase().includes(selectNameFilter.toLowerCase())
-    );
-  }
-);
