@@ -4,13 +4,12 @@ import { useDispatch } from "react-redux";
 import { RiContactsLine } from "react-icons/ri";
 import { FiPhone } from "react-icons/fi";
 import { GoTrash } from "react-icons/go";
+import { CiMenuKebab } from "react-icons/ci";
 
 import css from "./Contact.module.css";
 
 const Contact = ({ id, name, number }) => {
   const dispatch = useDispatch();
-
-  const onDeleteContact = () => dispatch(deleteContact(id));
 
   return (
     <>
@@ -24,9 +23,15 @@ const Contact = ({ id, name, number }) => {
           {number}
         </p>
       </div>
-      <button onClick={onDeleteContact} className={css.removeBtn}>
-        <GoTrash className={css.removeIcon} />
+      <button className={css.removeBtn}>
+        <CiMenuKebab className={css.removeIcon} />
       </button>
+      {/* <button
+        onClick={() => dispatch(deleteContact(id))}
+        className={css.removeBtn}
+      >
+        <GoTrash className={css.removeIcon} />
+      </button> */}
     </>
   );
 };

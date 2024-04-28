@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/auth/operation.js";
 
-import { LuUserPlus2 } from "react-icons/lu";
+import { IoLogInOutline } from "react-icons/io5";
 import { HiOutlineMailOpen } from "react-icons/hi";
 import { TbPasswordFingerprint } from "react-icons/tb";
 
@@ -75,7 +75,8 @@ const LoginForm = () => {
         </div>
 
         <button className={css.btn} type="submit">
-          <LuUserPlus2 className={css.addIcon} />
+          Log In
+          <IoLogInOutline className={css.addIcon} />
         </button>
       </Form>
     </Formik>

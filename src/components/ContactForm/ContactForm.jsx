@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 import { addContact } from "../../redux/contacts/operation.js";
 
-import { LuUserPlus2 } from "react-icons/lu";
+import { TiContacts } from "react-icons/ti";
 import { RiContactsLine } from "react-icons/ri";
 import { FiPhone } from "react-icons/fi";
 
@@ -23,11 +23,11 @@ const ContactForm = () => {
 
   const validationSchema = Yup.object().shape({
     name: Yup.string()
-      .required("Required")
+      .required("Name is required")
       .min(3, "Too Short!")
       .max(50, "Too Long!"),
     number: Yup.string()
-      .required("Required")
+      .required("Number is required")
       .min(3, "Too Short!")
       .max(50, "Too Long!"),
   });
@@ -73,7 +73,8 @@ const ContactForm = () => {
         </div>
 
         <button className={css.btn} type="submit">
-          <LuUserPlus2 className={css.addIcon} />
+          Add Contact
+          <TiContacts className={css.addIcon} />
         </button>
       </Form>
     </Formik>

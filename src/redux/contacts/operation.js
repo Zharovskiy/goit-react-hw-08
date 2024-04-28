@@ -1,11 +1,6 @@
-import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { instance } from "../auth/operation";
 
-const instance = axios.create({
-  baseURL: "https://connections-api.herokuapp.com",
-});
-
-// GET
 export const fetchContacts = createAsyncThunk(
   "contacts/fetchAll",
   async (_, thunkAPI) => {
@@ -18,7 +13,6 @@ export const fetchContacts = createAsyncThunk(
   }
 );
 
-// POST
 export const addContact = createAsyncThunk(
   "contacts/addContact",
   async (contact, thunkAPI) => {
@@ -31,7 +25,6 @@ export const addContact = createAsyncThunk(
   }
 );
 
-// DELETE
 export const deleteContact = createAsyncThunk(
   "contacts/deleteContact",
   async (id, thunkAPI) => {
@@ -44,7 +37,6 @@ export const deleteContact = createAsyncThunk(
   }
 );
 
-// PATCH
 export const updateContact = createAsyncThunk(
   "contacts/updateContact",
   async (id, thunkAPI) => {

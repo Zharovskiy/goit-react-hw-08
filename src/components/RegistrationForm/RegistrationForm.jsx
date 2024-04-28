@@ -96,6 +96,7 @@ const RegistrationForm = () => {
         </div>
 
         <button className={css.btn} type="submit">
+          Register
           <LuUserPlus2 className={css.addIcon} />
         </button>
       </Form>

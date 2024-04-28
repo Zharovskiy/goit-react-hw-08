@@ -1,6 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, isAnyOf } from "@reduxjs/toolkit";
 import { register } from "./operation";
 import { login } from "./operation";
+import { refreshUser } from "./operation";
+import { logout } from "./operation";
 
 const initialState = {
   user: {
@@ -14,39 +16,55 @@ const initialState = {
   error: null,
 };
 
-const handlePending = (state) => {
-  state.loading = true;
-  state.error = null;
-};
-
-const handleRejected = (state, action) => {
-  state.loading = false;
-  state.error = action.payload;
-};
-
 export const authSlice = createSlice({
   name: "auth",
   initialState: initialState,
   extraReducers: (builder) => {
     builder
-      // REGISTER
-      .addCase(register.pending, handlePending)
       .addCase(register.fulfilled, (state, action) => {
         state.loading = false;
         state.isLoggedIn = true;
         state.user = action.payload.user;
         state.token = action.payload.token;
       })
-      .addCase(register.rejected, handleRejected)
-      // LOGIN
-      .addCase(login.pending, handlePending)
       .addCase(login.fulfilled, (state, action) => {
         state.loading = false;
         state.isLoggedIn = true;
         state.user = action.payload.user;
         state.token = action.payload.token;
       })
-      .addCase(login.rejected, handleRejected);
+      .addCase(refreshUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.isLoggedIn = true;
+        state.user = action.payload;
+      })
+      .addCase(logout.fulfilled, () => {
+        return initialState;
+      })
+      .addMatcher(
+        isAnyOf(
+          register.pending,
+          login.pending,
+          refreshUser.pending,
+          logout.pending
+        ),
+        (state) => {
+          state.loading = true;
+          state.error = null;
+        }
+      )
+      .addMatcher(
+        isAnyOf(
+          register.rejected,
+          login.rejected,
+          refreshUser.rejected,
+          logout.rejected
+        ),
+        (state, action) => {
+          state.loading = false;
+          state.error = action.payload;
+        }
+      );
   },
 });
 

@@ -18,7 +18,7 @@ const SearchBox = () => {
     <label className={css.box}>
       <span className={css.text}>
         <TbSearch className={css.icon} />
-        Find contacts by name
+        Find contacts by name or number
       </span>
       <input
         className={css.input}
