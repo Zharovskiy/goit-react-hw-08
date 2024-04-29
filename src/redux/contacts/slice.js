@@ -7,8 +7,6 @@ import { logout } from "../auth/operation.js";
 import toast from "react-hot-toast";
 
 const initialState = {
-  menuId: null,
-  modalId: null,
   items: null,
   loading: false,
   error: null,
@@ -17,14 +15,6 @@ const initialState = {
 const contactsSlice = createSlice({
   name: "contacts",
   initialState: initialState,
-  reducers: {
-    toggleMenu(state, action) {
-      state.menuId = action.payload;
-    },
-    toggleModal(state, action) {
-      state.modalId = action.payload;
-    },
-  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchContacts.fulfilled, (state, action) => {
@@ -46,10 +36,15 @@ const contactsSlice = createSlice({
       .addCase(updateContact.fulfilled, (state, action) => {
         state.loading = false;
         // Перевірити роботу методу
-        const index = state.items.indexOf(
-          (item) => item.id === action.payload.id
-        );
+        const index = state.items.indexOf((item) => {
+          item.id === action.payload.id;
+          console.log("id item", item);
+          console.log("id server", action.payload);
+        });
+        // console.log("state contact: ", state.items, index);
         state.items.splice(index, 1, action.payload);
+        // console.log("updata data server: ", action.payload);
+        toast("Contact updated.");
       })
       .addCase(logout.fulfilled, (state) => {
         state.items = null;
@@ -82,7 +77,5 @@ const contactsSlice = createSlice({
       );
   },
 });
-
-export const { toggleMenu, toggleModal } = contactsSlice.actions;
 
 export const contactsReducer = contactsSlice.reducer;

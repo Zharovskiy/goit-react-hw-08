@@ -1,6 +1,4 @@
-import { selectMenu } from "../../redux/contacts/selectors";
-import { toggleMenu, toggleModal } from "../../redux/contacts/slice";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 import clsx from "clsx";
 
 import { RiContactsLine } from "react-icons/ri";
@@ -11,10 +9,8 @@ import { CiMenuKebab } from "react-icons/ci";
 
 import css from "./Contact.module.css";
 
-const Contact = ({ id, name, number }) => {
-  const isOpenId = useSelector(selectMenu);
-  const dispatch = useDispatch();
-
+const Contact = ({ id, name, number, setRedactModal, setDeleteModal }) => {
+  const [menuContact, setMenuContact] = useState(null);
   return (
     <>
       <div className={css.leftBox}>
@@ -31,10 +27,10 @@ const Contact = ({ id, name, number }) => {
         <button
           className={css.menuContactBtn}
           onClick={() => {
-            if (!isOpenId) {
-              dispatch(toggleMenu(id));
+            if (!menuContact) {
+              setMenuContact(id);
             } else {
-              dispatch(toggleMenu(null));
+              setMenuContact(null);
             }
           }}
         >
@@ -42,12 +38,18 @@ const Contact = ({ id, name, number }) => {
         </button>
         <div
           className={clsx(css.menu, {
-            [css.active]: isOpenId === id,
+            [css.active]: menuContact === id,
           })}
         >
           <ul>
             <li className={css.listBtn}>
-              <button className={css.menuBtn}>
+              <button
+                className={css.menuBtn}
+                onClick={() => {
+                  setMenuContact(null);
+                  setRedactModal({ id, name, number });
+                }}
+              >
                 <GoPencil className={css.menuIcon} />
                 Change
               </button>
@@ -56,8 +58,8 @@ const Contact = ({ id, name, number }) => {
               <button
                 className={css.menuBtn}
                 onClick={() => {
-                  dispatch(toggleMenu(null));
-                  dispatch(toggleModal(isOpenId));
+                  setMenuContact(null);
+                  setDeleteModal(id);
                 }}
               >
                 <GoTrash className={css.menuIcon} />

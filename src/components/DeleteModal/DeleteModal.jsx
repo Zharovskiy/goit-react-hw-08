@@ -1,23 +1,20 @@
 import { deleteContact } from "../../redux/contacts/operation.js";
-import { selectModal } from "../../redux/contacts/selectors.js";
-import { toggleModal } from "../../redux/contacts/slice.js";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import Modal from "react-modal";
 
 import css from "./DeleteModal.module.css";
 
-const DeleteModal = () => {
-  const isOpenId = useSelector(selectModal);
+const DeleteModal = ({ deleteModal, setDeleteModal }) => {
   const dispatch = useDispatch();
   return (
     <Modal
-      isOpen={Boolean(isOpenId)}
+      isOpen={Boolean(deleteModal)}
       overlayClassName="ReactModal__Overlay"
       className="ReactModal__Content"
       closeTimeoutMS={300}
       onRequestClose={() => {
-        dispatch(toggleModal(null));
+        setDeleteModal(null);
       }}
       ariaHideApp={false}
     >
@@ -26,8 +23,8 @@ const DeleteModal = () => {
         <button
           className={css.modalBtn}
           onClick={() => {
-            dispatch(toggleModal(null));
-            dispatch(deleteContact(isOpenId));
+            setDeleteModal(null);
+            dispatch(deleteContact(deleteModal));
           }}
         >
           Yes
@@ -35,7 +32,7 @@ const DeleteModal = () => {
         <button
           className={css.modalBtn}
           onClick={() => {
-            dispatch(toggleModal(null));
+            setDeleteModal(null);
           }}
         >
           No
