@@ -35,15 +35,10 @@ const contactsSlice = createSlice({
       })
       .addCase(updateContact.fulfilled, (state, action) => {
         state.loading = false;
-        // Перевірити роботу методу
-        const index = state.items.indexOf((item) => {
-          item.id === action.payload.id;
-          console.log("id item", item);
-          console.log("id server", action.payload);
-        });
-        // console.log("state contact: ", state.items, index);
+        const index = state.items.findIndex(
+          (item) => item.id === action.payload.id
+        );
         state.items.splice(index, 1, action.payload);
-        // console.log("updata data server: ", action.payload);
         toast("Contact updated.");
       })
       .addCase(logout.fulfilled, (state) => {
