@@ -1,9 +1,9 @@
 import { createSlice, isAnyOf } from "@reduxjs/toolkit";
-import { fetchContacts } from "../contacts/operation.js";
-import { addContact } from "../contacts/operation.js";
-import { deleteContact } from "../contacts/operation.js";
-import { updateContact } from "../contacts/operation.js";
-import { logout } from "../auth/operation.js";
+import { fetchContacts } from "../contacts/operations.js";
+import { addContact } from "../contacts/operations.js";
+import { deleteContact } from "../contacts/operations.js";
+import { updateContact } from "../contacts/operations.js";
+import { logout } from "../auth/operations.js";
 import toast from "react-hot-toast";
 
 const initialState = {

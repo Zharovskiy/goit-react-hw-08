@@ -1,7 +1,7 @@
 import { useEffect, Suspense, lazy } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Routes } from "react-router-dom";
-import { refreshUser } from "./redux/auth/operation.js";
+import { refreshUser } from "./redux/auth/operations.js";
 
 import Layout from "./components/Layout/Layout.jsx";
 import Loader from "./components/Loader/Loader.jsx";

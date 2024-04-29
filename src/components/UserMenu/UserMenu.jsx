@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { selectUserData } from "../../redux/auth/selectors";
-import { logout } from "../../redux/auth/operation";
+import { logout } from "../../redux/auth/operations";
 
 import { IoLogOutOutline } from "react-icons/io5";
 

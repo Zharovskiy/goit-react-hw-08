@@ -2,7 +2,7 @@ import { useId } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
-import { login } from "../../redux/auth/operation.js";
+import { login } from "../../redux/auth/operations.js";
 
 import { IoLogInOutline } from "react-icons/io5";
 import { HiOutlineMailOpen } from "react-icons/hi";

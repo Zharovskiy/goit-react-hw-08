@@ -2,7 +2,7 @@ import { useId } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
-import { register } from "../../redux/auth/operation.js";
+import { register } from "../../redux/auth/operations.js";
 
 import { LuUserPlus2 } from "react-icons/lu";
 import { RiContactsLine } from "react-icons/ri";

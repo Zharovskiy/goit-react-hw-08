@@ -1,4 +1,4 @@
-import { deleteContact } from "../../redux/contacts/operation.js";
+import { deleteContact } from "../../redux/contacts/operations.js";
 import { useDispatch } from "react-redux";
 
 import Modal from "react-modal";
