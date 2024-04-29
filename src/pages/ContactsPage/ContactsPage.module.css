@@ -16,6 +16,16 @@
   gap: 30px;
 }
 
+.contactsBox {
+  width: 100%;
+}
+
+.notContacts {
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+}
+
 @media screen and (min-width: 768px) {
   .box {
     flex-direction: row;

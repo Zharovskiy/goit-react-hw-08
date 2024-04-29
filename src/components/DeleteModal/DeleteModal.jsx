@@ -1,9 +1,6 @@
-import { isOpenModal } from "../../redux/contacts/slice.js";
 import { deleteContact } from "../../redux/contacts/operation.js";
-import {
-  selectModal,
-  selectIdForDelete,
-} from "../../redux/contacts/selectors.js";
+import { selectModal } from "../../redux/contacts/selectors.js";
+import { toggleModal } from "../../redux/contacts/slice.js";
 import { useSelector, useDispatch } from "react-redux";
 
 import Modal from "react-modal";
@@ -11,17 +8,16 @@ import Modal from "react-modal";
 import css from "./DeleteModal.module.css";
 
 const DeleteModal = () => {
-  const isOpen = useSelector(selectModal);
-  const id = useSelector(selectIdForDelete);
+  const isOpenId = useSelector(selectModal);
   const dispatch = useDispatch();
   return (
     <Modal
-      isOpen={isOpen}
-      overlayClassName={css.ReactModal__Overlay}
-      className={css.ReactModal__Content}
+      isOpen={Boolean(isOpenId)}
+      overlayClassName="ReactModal__Overlay"
+      className="ReactModal__Content"
       closeTimeoutMS={300}
       onRequestClose={() => {
-        dispatch(isOpenModal(false));
+        dispatch(toggleModal(null));
       }}
       ariaHideApp={false}
     >
@@ -30,7 +26,8 @@ const DeleteModal = () => {
         <button
           className={css.modalBtn}
           onClick={() => {
-            dispatch(deleteContact(id));
+            dispatch(toggleModal(null));
+            dispatch(deleteContact(isOpenId));
           }}
         >
           Yes
@@ -38,7 +35,7 @@ const DeleteModal = () => {
         <button
           className={css.modalBtn}
           onClick={() => {
-            dispatch(isOpenModal(false));
+            dispatch(toggleModal(null));
           }}
         >
           No

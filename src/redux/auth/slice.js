@@ -3,7 +3,6 @@ import { register } from "./operation";
 import { login } from "./operation";
 import { refreshUser } from "./operation";
 import { logout } from "./operation";
-// import { store } from "../store";
 
 const initialState = {
   user: {
@@ -40,7 +39,6 @@ export const authSlice = createSlice({
         state.user = action.payload;
       })
       .addCase(logout.fulfilled, () => {
-        // store.contacts.items = null;
         return initialState;
       })
       .addMatcher(

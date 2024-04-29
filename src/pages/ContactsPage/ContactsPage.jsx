@@ -34,12 +34,14 @@ const ContactsPage = () => {
           <ContactForm />
           <SearchBox />
         </div>
-        <div>
+        <div className={css.contactsBox}>
           <Loader loading={loading} />
           {contacts !== null && contacts.length !== 0 ? (
             <ContactList />
           ) : (
-            <b>You have not added any contact yet</b>
+            <b className={css.notContacts}>
+              You have not added any contact yet
+            </b>
           )}
           {error && <ErrorMessage />}
           <DeleteModal />

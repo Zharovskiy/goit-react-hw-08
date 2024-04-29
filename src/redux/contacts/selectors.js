@@ -1,9 +1,8 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { selectNameFilter } from "../filters/selectors.js";
 
-export const selectMenu = (state) => state.contacts.menu;
-export const selectIdForDelete = (state) => state.contacts.idDel;
-export const selectModal = (state) => state.contacts.modal;
+export const selectMenu = (state) => state.contacts.menuId;
+export const selectModal = (state) => state.contacts.modalId;
 export const selectContacts = (state) => state.contacts.items;
 export const selectLoading = (state) => state.contacts.loading;
 export const selectError = (state) => state.contacts.error;

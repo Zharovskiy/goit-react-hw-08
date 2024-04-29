@@ -3,12 +3,12 @@ import { fetchContacts } from "../contacts/operation.js";
 import { addContact } from "../contacts/operation.js";
 import { deleteContact } from "../contacts/operation.js";
 import { updateContact } from "../contacts/operation.js";
+import { logout } from "../auth/operation.js";
 import toast from "react-hot-toast";
 
 const initialState = {
-  menu: false,
-  idDel: null,
-  modal: false,
+  menuId: null,
+  modalId: null,
   items: null,
   loading: false,
   error: null,
@@ -18,14 +18,11 @@ const contactsSlice = createSlice({
   name: "contacts",
   initialState: initialState,
   reducers: {
-    isOpenMenu(state, action) {
-      state.menu = action.payload;
+    toggleMenu(state, action) {
+      state.menuId = action.payload;
     },
-    idForDelete(state, action) {
-      state.idDel = action.payload;
-    },
-    isOpenModal(state, action) {
-      state.modal = action.payload;
+    toggleModal(state, action) {
+      state.modalId = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -54,12 +51,16 @@ const contactsSlice = createSlice({
         );
         state.items.splice(index, 1, action.payload);
       })
+      .addCase(logout.fulfilled, (state) => {
+        state.items = null;
+      })
       .addMatcher(
         isAnyOf(
           fetchContacts.pending,
           addContact.pending,
           deleteContact.pending,
-          updateContact.pending
+          updateContact.pending,
+          logout.pending
         ),
         (state) => {
           state.loading = true;
@@ -71,7 +72,8 @@ const contactsSlice = createSlice({
           fetchContacts.rejected,
           addContact.rejected,
           deleteContact.rejected,
-          updateContact.rejected
+          updateContact.rejected,
+          logout.rejected
         ),
         (state, action) => {
           state.loading = false;
@@ -81,6 +83,6 @@ const contactsSlice = createSlice({
   },
 });
 
-export const { isOpenMenu, idForDelete, isOpenModal } = contactsSlice.actions;
+export const { toggleMenu, toggleModal } = contactsSlice.actions;
 
 export const contactsReducer = contactsSlice.reducer;

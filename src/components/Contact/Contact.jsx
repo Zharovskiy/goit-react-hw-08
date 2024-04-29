@@ -1,10 +1,6 @@
+import { selectMenu } from "../../redux/contacts/selectors";
+import { toggleMenu, toggleModal } from "../../redux/contacts/slice";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  isOpenMenu,
-  idForDelete,
-  isOpenModal,
-} from "../../redux/contacts/slice";
-import { selectMenu, selectIdForDelete } from "../../redux/contacts/selectors";
 import clsx from "clsx";
 
 import { RiContactsLine } from "react-icons/ri";
@@ -16,8 +12,7 @@ import { CiMenuKebab } from "react-icons/ci";
 import css from "./Contact.module.css";
 
 const Contact = ({ id, name, number }) => {
-  const isOpen = useSelector(selectMenu);
-  const idMenu = useSelector(selectIdForDelete);
+  const isOpenId = useSelector(selectMenu);
   const dispatch = useDispatch();
 
   return (
@@ -36,15 +31,18 @@ const Contact = ({ id, name, number }) => {
         <button
           className={css.menuContactBtn}
           onClick={() => {
-            dispatch(isOpenMenu(!isOpen));
-            dispatch(idForDelete(id));
+            if (!isOpenId) {
+              dispatch(toggleMenu(id));
+            } else {
+              dispatch(toggleMenu(null));
+            }
           }}
         >
           <CiMenuKebab className={css.menuContactIcon} />
         </button>
         <div
           className={clsx(css.menu, {
-            [css.active]: isOpen && idMenu === id,
+            [css.active]: isOpenId === id,
           })}
         >
           <ul>
@@ -58,8 +56,8 @@ const Contact = ({ id, name, number }) => {
               <button
                 className={css.menuBtn}
                 onClick={() => {
-                  dispatch(isOpenMenu(false));
-                  dispatch(isOpenModal(true));
+                  dispatch(toggleMenu(null));
+                  dispatch(toggleModal(isOpenId));
                 }}
               >
                 <GoTrash className={css.menuIcon} />
