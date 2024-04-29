@@ -3,8 +3,12 @@ import { fetchContacts } from "../contacts/operation.js";
 import { addContact } from "../contacts/operation.js";
 import { deleteContact } from "../contacts/operation.js";
 import { updateContact } from "../contacts/operation.js";
+import toast from "react-hot-toast";
 
 const initialState = {
+  menu: false,
+  idDel: null,
+  modal: false,
   items: null,
   loading: false,
   error: null,
@@ -13,6 +17,17 @@ const initialState = {
 const contactsSlice = createSlice({
   name: "contacts",
   initialState: initialState,
+  reducers: {
+    isOpenMenu(state, action) {
+      state.menu = action.payload;
+    },
+    idForDelete(state, action) {
+      state.idDel = action.payload;
+    },
+    isOpenModal(state, action) {
+      state.modal = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchContacts.fulfilled, (state, action) => {
@@ -22,12 +37,14 @@ const contactsSlice = createSlice({
       .addCase(addContact.fulfilled, (state, action) => {
         state.loading = false;
         state.items.push(action.payload);
+        toast("Contact added.");
       })
       .addCase(deleteContact.fulfilled, (state, action) => {
         state.loading = false;
         state.items = state.items.filter(
           (item) => item.id !== action.payload.id
         );
+        toast("Contact deleted.");
       })
       .addCase(updateContact.fulfilled, (state, action) => {
         state.loading = false;
@@ -63,5 +80,7 @@ const contactsSlice = createSlice({
       );
   },
 });
+
+export const { isOpenMenu, idForDelete, isOpenModal } = contactsSlice.actions;
 
 export const contactsReducer = contactsSlice.reducer;

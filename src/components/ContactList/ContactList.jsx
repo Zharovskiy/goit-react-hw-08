@@ -7,16 +7,19 @@ import css from "./ContactList.module.css";
 
 const ContactList = () => {
   const contacts = useSelector(selectFilteredContacts);
+
   return (
-    <ul className={css.contactList}>
-      {contacts.map(({ id, name, number }) => {
-        return (
-          <li className={css.contactCard} key={id}>
-            <Contact id={id} name={name} number={number} />
-          </li>
-        );
-      })}
-    </ul>
+    <>
+      <ul className={css.contactList}>
+        {contacts.map(({ id, name, number }) => {
+          return (
+            <li className={css.contactCard} key={id}>
+              <Contact id={id} name={name} number={number} />
+            </li>
+          );
+        })}
+      </ul>
+    </>
   );
 };
 

@@ -1,10 +1,4 @@
 .position {
-  /* 100px це сума падінгів контейнера. Верх 80px і низ 20px */
-  height: calc(100vh - 100px);
-  width: 100%;
   display: flex;
-  flex-direction: column;
-  gap: 15px;
   justify-content: center;
-  align-items: center;
 }

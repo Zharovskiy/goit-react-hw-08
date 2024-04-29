@@ -12,6 +12,7 @@ import SearchBox from "../../components/SearchBox/SearchBox.jsx";
 import Loader from "../../components/Loader/Loader.jsx";
 import ContactList from "../../components/ContactList/ContactList.jsx";
 import ErrorMessage from "../../components/ErrorMassage/ErrorMessage.jsx";
+import DeleteModal from "../../components/DeleteModal/DeleteModal.jsx";
 
 import css from "./ContactsPage.module.css";
 
@@ -41,6 +42,7 @@ const ContactsPage = () => {
             <b>You have not added any contact yet</b>
           )}
           {error && <ErrorMessage />}
+          <DeleteModal />
         </div>
       </div>
     </>
