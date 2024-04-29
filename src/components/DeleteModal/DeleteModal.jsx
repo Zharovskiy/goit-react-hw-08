@@ -18,7 +18,7 @@ const DeleteModal = ({ deleteModal, setDeleteModal }) => {
       }}
       ariaHideApp={false}
     >
-      <p>Do you really want to delete the contact?</p>
+      <p className={css.question}>Do you really want to delete the contact?</p>
       <div className={css.boxBtn}>
         <button
           className={css.modalBtn}

@@ -2,8 +2,8 @@
   position: relative;
   border: 1px solid transparent;
   border-radius: 5px;
-  width: 345px;
-  padding: 15px 10px 10px 10px;
+  width: 310px;
+  padding: 15px 0 0 0;
   display: flex;
   flex-direction: column;
   gap: 10px;

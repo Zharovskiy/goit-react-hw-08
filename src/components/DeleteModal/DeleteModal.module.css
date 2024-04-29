@@ -1,7 +1,10 @@
+.question {
+  text-align: center;
+}
+
 .boxBtn {
   display: flex;
-  gap: 80px;
-  justify-content: center;
+  justify-content: space-around;
 }
 
 .modalBtn {
