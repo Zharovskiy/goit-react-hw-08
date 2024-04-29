@@ -12,7 +12,7 @@ const UserMenu = () => {
 
   return (
     <div className={css.userMenu}>
-      <p>Welcome, {userData.name}</p>
+      <p className={css.greeting}>Welcome, {userData.name}</p>
       <button
         className={css.button}
         onClick={() => dispatch(logout())}
