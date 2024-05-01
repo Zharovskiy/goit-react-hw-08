@@ -1,3 +1,31 @@
+.box {
+  max-width: 728px;
+  margin: 0 auto;
+}
+
 .title {
   text-align: center;
+  color: #4e75ff;
+}
+
+.titleTwo {
+  text-align: center;
+  margin: 20px 0 10px 0;
+}
+
+.list {
+  margin-left: 20px;
+  padding: 20px;
+}
+
+.li {
+  list-style-type: decimal;
+}
+
+.li:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.span {
+  color: #4e75ff;
 }
