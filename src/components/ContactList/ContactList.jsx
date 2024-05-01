@@ -9,6 +9,7 @@ import DeleteModal from "../DeleteModal/DeleteModal.jsx";
 import css from "./ContactList.module.css";
 
 const ContactList = () => {
+  const [menuContact, setMenuContact] = useState(null);
   const [redactModal, setRedactModal] = useState(null);
   const [deleteModal, setDeleteModal] = useState(null);
   const contacts = useSelector(selectFilteredContacts);
@@ -23,6 +24,8 @@ const ContactList = () => {
                 id={id}
                 name={name}
                 number={number}
+                menuContact={menuContact}
+                setMenuContact={setMenuContact}
                 setRedactModal={setRedactModal}
                 setDeleteModal={setDeleteModal}
               />

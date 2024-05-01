@@ -1,4 +1,3 @@
-import { useState } from "react";
 import clsx from "clsx";
 
 import { RiContactsLine } from "react-icons/ri";
@@ -9,8 +8,15 @@ import { CiMenuKebab } from "react-icons/ci";
 
 import css from "./Contact.module.css";
 
-const Contact = ({ id, name, number, setRedactModal, setDeleteModal }) => {
-  const [menuContact, setMenuContact] = useState(null);
+const Contact = ({
+  id,
+  name,
+  number,
+  menuContact,
+  setMenuContact,
+  setRedactModal,
+  setDeleteModal,
+}) => {
   return (
     <>
       <div className={css.leftBox}>
@@ -26,13 +32,7 @@ const Contact = ({ id, name, number, setRedactModal, setDeleteModal }) => {
       <div className={css.menuBox}>
         <button
           className={css.menuContactBtn}
-          onClick={() => {
-            if (!menuContact) {
-              setMenuContact(id);
-            } else {
-              setMenuContact(null);
-            }
-          }}
+          onClick={() => setMenuContact(() => id)}
         >
           <CiMenuKebab className={css.menuContactIcon} />
         </button>
@@ -46,20 +46,20 @@ const Contact = ({ id, name, number, setRedactModal, setDeleteModal }) => {
               <button
                 className={css.menuBtn}
                 onClick={() => {
-                  setMenuContact(null);
+                  setMenuContact(() => null);
                   setRedactModal({ id, name, number });
                 }}
               >
                 <GoPencil className={css.menuIcon} />
-                Change
+                Edit
               </button>
             </li>
             <li className={css.listBtn}>
               <button
                 className={css.menuBtn}
                 onClick={() => {
-                  setMenuContact(null);
-                  setDeleteModal(id);
+                  setMenuContact(() => null);
+                  setDeleteModal(() => id);
                 }}
               >
                 <GoTrash className={css.menuIcon} />
