@@ -32,7 +32,10 @@ const Contact = ({
       <div className={css.menuBox}>
         <button
           className={css.menuContactBtn}
-          onClick={() => setMenuContact(() => id)}
+          onClick={() => {
+            if (!menuContact || menuContact !== id) setMenuContact(() => id);
+            if (menuContact === id) setMenuContact(() => null);
+          }}
         >
           <CiMenuKebab className={css.menuContactIcon} />
         </button>
