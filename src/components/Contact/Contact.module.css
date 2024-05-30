@@ -42,12 +42,30 @@
   scale: 1.1;
 }
 
+.backdropMenu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+  background-color: transparent;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.activeBackdropMenu {
+  opacity: 1;
+  visibility: visible;
+}
+
 .menu {
   position: absolute;
   top: -8px;
   right: 30px;
   width: 95px;
   padding: 10px;
+  z-index: 15;
   background-color: white;
   border: 1px solid rgb(6, 6, 109);
   border-radius: 5px;

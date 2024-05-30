@@ -29,16 +29,25 @@ const Contact = ({
           {number}
         </p>
       </div>
+
       <div className={css.menuBox}>
         <button
           className={css.menuContactBtn}
           onClick={() => {
             if (!menuContact || menuContact !== id) setMenuContact(() => id);
-            if (menuContact === id) setMenuContact(() => null);
           }}
         >
           <CiMenuKebab className={css.menuContactIcon} />
         </button>
+        <div
+          className={clsx(css.backdropMenu, {
+            [css.activeBackdropMenu]: menuContact,
+          })}
+          onClick={() => {
+            setMenuContact(() => null);
+          }}
+        ></div>
+
         <div
           className={clsx(css.menu, {
             [css.active]: menuContact === id,
