@@ -1,10 +1,8 @@
-import clsx from "clsx";
-
 import { RiContactsLine } from "react-icons/ri";
 import { FiPhone } from "react-icons/fi";
-import { GoTrash } from "react-icons/go";
-import { GoPencil } from "react-icons/go";
 import { CiMenuKebab } from "react-icons/ci";
+
+import ContactMenu from "../ContactMenu/ContactMenu.jsx";
 
 import css from "./Contact.module.css";
 
@@ -39,47 +37,15 @@ const Contact = ({
         >
           <CiMenuKebab className={css.menuContactIcon} />
         </button>
-        <div
-          className={clsx(css.backdropMenu, {
-            [css.activeBackdropMenu]: menuContact,
-          })}
-          onClick={() => {
-            setMenuContact(() => null);
-          }}
-        ></div>
-
-        <div
-          className={clsx(css.menu, {
-            [css.active]: menuContact === id,
-          })}
-        >
-          <ul>
-            <li className={css.listBtn}>
-              <button
-                className={css.menuBtn}
-                onClick={() => {
-                  setMenuContact(() => null);
-                  setRedactModal({ id, name, number });
-                }}
-              >
-                <GoPencil className={css.menuIcon} />
-                Edit
-              </button>
-            </li>
-            <li className={css.listBtn}>
-              <button
-                className={css.menuBtn}
-                onClick={() => {
-                  setMenuContact(() => null);
-                  setDeleteModal(() => id);
-                }}
-              >
-                <GoTrash className={css.menuIcon} />
-                Delete
-              </button>
-            </li>
-          </ul>
-        </div>
+        <ContactMenu
+          id={id}
+          name={name}
+          number={number}
+          menuContact={menuContact}
+          setMenuContact={setMenuContact}
+          setRedactModal={setRedactModal}
+          setDeleteModal={setDeleteModal}
+        />
       </div>
     </>
   );
